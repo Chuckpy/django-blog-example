@@ -24,9 +24,19 @@ O desafio do projeto foi criar um blog ficticio com retornos em JSON em apis RES
 - Fácil Escalabilidade
 - Resistente a possíveis falhas
 
+## Arquitetura de dados
+
+![Diagrama](docs/diagram.png)
+
 ### Não é preciso usar o navegador!
 
 Caso possua o Insomnia, basta importar o pacote de requisições pelo imnsonia, o nome do arquivo para importar é 'challenge_insomnia.json' esta nesse mesmo repositório, nos documentos git.
+
+### Como rodar 
+
+Em primeiro lugar, é preciso o Python 3.2 +, dito isso, basta clonar o repositório,  instalar as libs necessárias, com ***pip insatall -r requirements.txt***, feito isso usar o django (agora instalado para) rodar o servidor localmente : ***python3 manage.py runserver***
+
+## Aplicações :
 
 ### Autenticação
 
