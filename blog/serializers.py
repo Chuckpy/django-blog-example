@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import PostObject, KeyWords, Type
+from users.models import CoreUser
 
 
 class KeyWordsSerializer(serializers.Serializer):
@@ -11,6 +12,8 @@ class KeyWordsSerializer(serializers.Serializer):
         fields = ["name"]
 
 class PostSerializer(serializers.Serializer): 
+
+    author = serializers.PrimaryKeyRelatedField(read_only=True)
     title = serializers.CharField(max_length=500)
     subtitle = serializers.CharField(max_length=500)
     type = serializers.PrimaryKeyRelatedField(queryset=Type.objects.all())
@@ -22,9 +25,9 @@ class PostSerializer(serializers.Serializer):
         model = PostObject
         fields = ["title","subtitle", "type", "content", "status", "keywords_set"]
     
-    def create(self, validated_data):        
-        
-        validated_data["type"] = Type.objects.get(id = validated_data.pop("type"))
+    def create(self, validated_data):
+
+        validated_data["author"] = self.context["request"].user    
         keywords_set = validated_data.pop("keywords_set")
         post = PostObject.objects.create(**validated_data)
         for keyword in keywords_set :  
@@ -35,6 +38,7 @@ class PostSerializer(serializers.Serializer):
                 key.save()
                 post.keywords_set.add(key)
         post.save()
+        
         return post
 
         

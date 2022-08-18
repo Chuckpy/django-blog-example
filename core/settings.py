@@ -130,7 +130,7 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-
+CSRF_COOKIE_SECURE = False
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),

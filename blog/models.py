@@ -30,7 +30,7 @@ class PostObject(BaseMixin):
         verbose_name = _("Post")
         verbose_name_plural = _("Posts")
 
-    author = models.ForeignKey(CoreUser, on_delete=models.CASCADE, null=True)
+    author = models.ForeignKey(CoreUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=500)
     subtitle = models.CharField(max_length=500)
     type = models.ForeignKey(Type, on_delete=models.SET_NULL, null=True)
@@ -39,5 +39,5 @@ class PostObject(BaseMixin):
     keywords_set = models.ManyToManyField(KeyWords)
 
     def __str__(self) :
-        return f"Post {self.title}"
+        return f"{self.id} | Post {self.title}"
 
